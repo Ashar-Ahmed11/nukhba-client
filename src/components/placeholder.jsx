@@ -3,7 +3,7 @@ import React from 'react'
 
 export default function Placeholder() {
     return (
-        <div style={{backgroundColor:"#000000"}} class="card px-2" aria-hidden="true">
+        <div style={{backgroundColor:"#ffffff"}} class="card px-2" aria-hidden="true">
             <div style={{height:"300px"}} className='card-img-top placeholder-glow'>
             <span style={{height:"100%",width:'100%'}} class="placeholder col-12"></span>
             </div>

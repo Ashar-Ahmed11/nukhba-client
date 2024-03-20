@@ -21,7 +21,7 @@ export default function WalletItem({ data }) {
     const context = useContext(NoteContext)
     const { addProduct, getProduct, refreshPage } = context
     const { name, assets, price, description, _id, sku } = data
-    console.log(parseInt(sku))
+    // console.log(parseInt(sku))
     const [scaler, setScaler] = useState("2.15")
 
     // const [transformedUrl, setTransformedUrl] = useState("")
@@ -89,7 +89,8 @@ export default function WalletItem({ data }) {
 
     const [imgLoader, setImgLoader] = useState(false)
 
-    const color = "#F4B92D"
+    const color = "#212427"
+  
 
     useEffect(() => {
         setImgLoader(false)
@@ -144,7 +145,7 @@ export default function WalletItem({ data }) {
         loop: true,
 
         created() {
-            setLoaded(assets.length<2?false:true)
+            setLoaded(assets.length < 2 ? false : true)
         },
     }, [MutationPlugin, ResizePlugin])
 
@@ -158,8 +159,8 @@ export default function WalletItem({ data }) {
             data-gird-slide
             data-aos-duration={"800"}
             data-aos-easing={"ease-out-quart"}
-            className={'px-1 col-md-4 col-6 my-2'} style={{ cursor: 'pointer' }}>
-            <div className="card" data-label={sku && `${sku}% Off`} style={{ backgroundColor: "#000000" }}>
+            className={'px-1 col-md-4 col-lg-3 col-6 my-2'} style={{ cursor: 'pointer' }}>
+            <div className="card border-0 shadow-0" data-label={sku && `${sku}% Off`} style={{ backgroundColor: "#ffffff" }}>
                 {sku && <div class="ribbon ribbon-top-left"><span>{sku}% OFF</span></div>}
                 <div style={{ overflow: 'hidden' }}>
                     {/* <div style={{ overflow: 'hidden', height: 'max-content', display: 'flex', justifyContent: 'center', alignItems: 'center', transition: "1s ease", height: checker || imgLoader ? 'max-content' : '300px' }}> */}
@@ -179,14 +180,14 @@ export default function WalletItem({ data }) {
                             <div ref={sliderRef} className="keen-slider">
                                 {assets.map((e) => {
                                     return <div className="keen-slider__slide">
-                                        <div key={e.url} onLoad={(e) => { setImgLoader(true); setHeight('max-content'); e.target.alt = 'hello'; setChecker(e.target.alt); e.target.loading = 'lazy'; e.target.onLoad = setImgLoader(true) }} style={{ transform: `scale(${scaler})`,marginBottom:'100%' }} className={`card-img-top position-relative w-100 h-100`}>
+                                        <div key={e.url} onLoad={(e) => { setImgLoader(true); setHeight('max-content'); e.target.alt = 'hello'; setChecker(e.target.alt); e.target.loading = 'lazy'; e.target.onLoad = setImgLoader(true) }} style={{ transform: `scale(${scaler})`, marginBottom: '100%' }} className={`card-img-top position-relative w-100 h-100`}>
                                             <Link to={`/product/${_id}`}>
-                                                <Image cloudName="dextrzp2q" className="card-img-top position-absolute w-100 h-100" style={{top:0}} key={e.url} publicId={e.url} type="fetch">
+                                                <Image cloudName="dextrzp2q" className="card-img-top position-absolute w-100 h-100" style={{ top: 0 }} key={e.url} publicId={e.url} type="fetch">
 
-                                                    <Transformation aspectRatio="1:1" crop="pad" background="black" />
+                                                    <Transformation aspectRatio="1:1" crop="pad" background="#f1f1f1" />
 
                                                     <Transformation fetchFormat="webp" />
-                                                    <Transformation crop="pad" height="1000" width="1000" background="black" />
+                                                    <Transformation crop="pad" height="1000" width="1000" background="#f1f1f1" />
                                                     <Transformation quality="60" />
                                                 </Image>
                                             </Link>
@@ -242,17 +243,14 @@ export default function WalletItem({ data }) {
                 </div>
                 <Link to={`/product/${_id}`}>
                     <div className="card-body text-center">
-                        <p style={{ color: color, fontSize: '17.6px', margin: '0px 0px 4px' }} className="card-title">{name}</p>
+                        <p style={{ color: color, fontSize: '17.6px', margin: '0px 0px 4px' }} className="card-title">{name.slice(0,42)+ `${name.length>42?"...":""}`}</p>
                         {sku ? <div className="d-flex justify-content-center">
                             <strike style={{ color: color, fontWeight: 'bolder' }}><p style={{ color: '#ad7d0b', fontSize: '15.84px' }} className="card-text mx-2">{"Rs" + data.inventory.available.toLocaleString('en-US') + '.00'}</p></strike>
                             <p style={{ color: color, fontSize: '15.84px', fontWeight: 'bold' }} className="card-text">{data.price.toLocaleString('en-US', {
-  style: 'currency',
-  currency: 'PKR',
-})}</p>
-                        </div> : <p style={{ color: color, fontSize: '15.84px' }} className="card-text">{data.price.toLocaleString('en-US', {
-  style: 'currency',
-  currency: 'PKR',
-})}</p>}
+                                style: 'currency',
+                                currency: 'PKR',
+                            })}</p>
+                        </div> : <p style={{ color: color, fontSize: '15.84px' }} className="card-text">{data.localePrice}</p>}
                     </div>
                 </Link>
             </div>

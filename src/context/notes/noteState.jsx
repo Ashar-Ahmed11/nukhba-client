@@ -18,7 +18,7 @@ const NoteState = (props) => {
   // const [cart, setCart] = useState({ line_items: [], subtotal: { formatted_with_code: "Rs0.00", raw: "" } })
   const [cart, setCart] = useLocalStorage('cart2', [])
   const [mySpace, setMySpace] = useState(15)
-
+ const [productsFetched, setproductsFetched] = useState(false)
   const location = useLocation()
 
   const [currentPage, setCurrentPage] = useState(1)
@@ -48,6 +48,7 @@ const NoteState = (props) => {
 
     settheProductLoader(false)
     setMySpace(0)
+    setproductsFetched(true)
     // console.log(data.map((e)=>{return e.id}))
   }
   const fetchCart = async () => {
@@ -89,7 +90,7 @@ const NoteState = (props) => {
 
     }
     else {
-      setCart([...cart, { name: productId.name, price: productId.price, image: productId.assets[0].url, id: productId._id, quantity: quantity, animation: false }])
+      setCart([...cart, { name: productId.name, price: productId.price, image: productId.assets[0].url, id: productId._id, quantity: quantity, animation: false,localePrice:productId.localePrice }])
       // setProductLoader(true)
       // const response = await commerce.cart.add(productId, quantity)
       // // console.log(response)
@@ -130,23 +131,9 @@ const NoteState = (props) => {
     // setCart(response)
     // setLoader(false)
     // setShowAnimation(true)
-    let anotherIndex
-    cart.filter((element, index) => {
-      if (element.id == productId.id) {
-        anotherIndex = index
-      }
-    })
-
-    cart[anotherIndex].animation = true
-
-    setCart([...cart])
-    setTimeout(() => {
-
-      // setShowAnimation(false)
-      cart[anotherIndex].animation = false
-      const newArr = cart.filter((element) => { return element.id !== productId.id })
-      setCart(newArr)
-    }, 700);
+   
+    const newArr = cart.filter((element) => { return element.id !== productId.id })
+    setCart(newArr)
   }
 
   const clearCart = async () => {
@@ -628,7 +615,7 @@ const NoteState = (props) => {
 
 
 
-  const createProduct = async (name, price, description, category,homePreview,youtubeLink) => {
+  const createProduct = async (name, price, description, category,homePreview,youtubeLink,priceAED) => {
     setEditorLoader(true)
     const url = "https://faithful-bass-yoke.cyclic.app/api/products/createproduct"
     // Default options are marked with *
@@ -649,7 +636,8 @@ const NoteState = (props) => {
         createdAt:1681950730,
         category:category,
         homePreview:homePreview,
-        youtubeLink:youtubeLink==''?null:youtubeLink
+        youtubeLink:youtubeLink==''?null:youtubeLink,
+        priceAED:priceAED
 
       }
       ), // body data type must match "Content-Type" header
@@ -664,7 +652,7 @@ const NoteState = (props) => {
   }
 
 
-  const editProduct = async (prodid,name, price, description, category,homePreview,youtubeLink) => {
+  const editProduct = async (prodid,name, price, description, category,homePreview,youtubeLink,priceAED) => {
     setEditorLoader(true)
     const url = `https://faithful-bass-yoke.cyclic.app/api/products/editProduct/${prodid}`
     // Default options are marked with *
@@ -685,7 +673,8 @@ const NoteState = (props) => {
         createdAt:1681950730,
         category:category,
         homePreview:homePreview,
-        youtubeLink:youtubeLink==''?null:youtubeLink
+        youtubeLink:youtubeLink==''?null:youtubeLink,
+        priceAED:priceAED
 
       }
       ), // body data type must match "Content-Type" header
@@ -884,9 +873,34 @@ const NoteState = (props) => {
 
   const [checkouter, setcheckouter] = useState(false)
 
+  const [country, setCountry] = useLocalStorage('hello',null)
+  const openRef = useRef(null)
+
+  
+  const getCategories = async () => {
+    setMainLoader(true)
+    const url = "https://faithful-bass-yoke.cyclic.app/api/getdata/getcategories"
+    const response = await fetch(url, {
+        method: 'GET', // *GET, POST, PUT, DELETE, etc.
+        mode: 'cors', // no-cors, *cors, same-origin
+        headers: {
+            'Content-Type': 'application/json'
+            // 'Content-Type': 'application/x-www-form-urlencoded',
+        },
+
+
+        // body data type must match "Content-Type" header
+    }
+    );
+
+    const data = await response.json()
+    setCategories(data)
+    setMainLoader(false)
+}
+
   console.clear()
   return (
-    <NoteContext.Provider value={{setProducts,setHomeData,setCategoryData, deleteProduct,editProduct,setProductView, showAnimation, checkouter, setcheckouter, totalCal, settotalCal, getProductLoader, navLoader, setnavLoader, theProductLoader, anotherImageLoader, setAnotherImageLoader, categoriesRef, deleteCategory, createCategory, categories, setCategories, imgLoad, setImgLoad, refreshPage, mainProductId, setSliderSize, sliderSize, testimonialSliderRef, setImgPreview, modalRef, setModalIsOpen, modalIsOpen, imgPreview, loaded, setLoaded, imgIsLoaded, setImgIsLoaded, categoryImage,  createProduct, generateDownload, setMySpace, pageRef, anotherLoader, setAnotherLoader, getHomeProducts, homeProducts, currentPage, firstItemIndex, lastItemIndex, setCurrentPage, catyImageEditor, setCatyImageEditor, setCategorial, categorial, setCatyEditor, catyEditor, categoryEditor, getCategoryData, categoryData, setLoginLoader, editorLoader, footerImage, carousalEditor, setCarousalEditor, setFooterImage, setImageEditor, imageEditor, setComponent, Component, setText, text, editComponent, myRef, setAdminView, adminView, editor, homeData, getHomeData, loginLoader, loginAdmin, cloudinary, checkoutLoader, sendWhatsappMessage, sliderRefTwo, mainLoader, setMainLoader, productLoader, loader, productView, getProduct, removeProduct, updateProduct, ref, openCart, cart, addProduct, fetchProduct, products, fetchCart }}>
+    <NoteContext.Provider value={{setEditorLoader,history,getCategories,productsFetched,setCart,openRef,country,setCountry,setProducts,setHomeData,setCategoryData, deleteProduct,editProduct,setProductView, showAnimation, checkouter, setcheckouter, totalCal, settotalCal, getProductLoader, navLoader, setnavLoader, theProductLoader, anotherImageLoader, setAnotherImageLoader, categoriesRef, deleteCategory, createCategory, categories, setCategories, imgLoad, setImgLoad, refreshPage, mainProductId, setSliderSize, sliderSize, testimonialSliderRef, setImgPreview, modalRef, setModalIsOpen, modalIsOpen, imgPreview, loaded, setLoaded, imgIsLoaded, setImgIsLoaded, categoryImage,  createProduct, generateDownload, setMySpace, pageRef, anotherLoader, setAnotherLoader, getHomeProducts, homeProducts, currentPage, firstItemIndex, lastItemIndex, setCurrentPage, catyImageEditor, setCatyImageEditor, setCategorial, categorial, setCatyEditor, catyEditor, categoryEditor, getCategoryData, categoryData, setLoginLoader, editorLoader, footerImage, carousalEditor, setCarousalEditor, setFooterImage, setImageEditor, imageEditor, setComponent, Component, setText, text, editComponent, myRef, setAdminView, adminView, editor, homeData, getHomeData, loginLoader, loginAdmin, cloudinary, checkoutLoader, sendWhatsappMessage, sliderRefTwo, mainLoader, setMainLoader, productLoader, loader, productView, getProduct, removeProduct, updateProduct, ref, openCart, cart, addProduct, fetchProduct, products, fetchCart }}>
       {props.children}
     </NoteContext.Provider>
   )

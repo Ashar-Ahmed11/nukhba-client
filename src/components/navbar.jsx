@@ -1,6 +1,6 @@
 import React from 'react'
 import { useRef } from 'react'
-import logo from './nukhbaLogo.png'
+import logo from './nukhbaLogo1.png'
 import Cart from './cart'
 import { useContext, useState } from 'react'
 import NoteContext from '../context/notes/noteContext'
@@ -11,29 +11,9 @@ import { useEffect } from 'react'
 export default function Navbar() {
     const context = useContext(NoteContext)
     const location = useLocation()
-    const { setProducts, setnavLoader, categoriesRef, categories, setCategories, setMySpace, pageRef, ref, openCart, fetchCart, mainLoader, adminView, setAdminView, modalIsOpen, setMainLoader } = context
-
-    const getCategories = async () => {
-        setMainLoader(true)
-          const url = "https://faithful-bass-yoke.cyclic.app/api/getdata/getcategories"
-    const response = await fetch(url, {
-        method: 'GET', // *GET, POST, PUT, DELETE, etc.
-        mode: 'cors', // no-cors, *cors, same-origin
-        headers: {
-            'Content-Type': 'application/json'
-            // 'Content-Type': 'application/x-www-form-urlencoded',
-        },
+    const {getCategories, openRef, country, setProducts, setnavLoader, categoriesRef, categories, setCategories, setMySpace, pageRef, ref, openCart, fetchCart, mainLoader, adminView, setAdminView, modalIsOpen, setMainLoader } = context
 
 
-        // body data type must match "Content-Type" header
-    }
-    );
-
-    const data = await response.json()
-    setCategories(data)
-        setMainLoader(false)
-    }
-    
 
 
     useEffect(() => {
@@ -42,16 +22,18 @@ export default function Navbar() {
 
 
     // let newCategories = categories.filter((e)=>{return e._id=="6433332d10b9054a792b64ef"})   
-   
-    
+
+
     let anotherCategory = []
     anotherCategory = categories
     const anotherArray = anotherCategory.filter((e) => { return e._id == "6433332d10b9054a792b64ef" })
     const array = categories.filter((e) => { return e._id !== "6433332d10b9054a792b64ef" })
-    let finalCategory = []
-    finalCategory = [...anotherArray, ...array]
+    let xyzCategory = []
+    xyzCategory = [...anotherArray, ...array]
 
-    // console.log(categories)
+    const finalCategory = xyzCategory.filter((e)=>{return !e.firstHeading.includes("*")})
+
+
 
 
     // console.log(categories)
@@ -62,7 +44,7 @@ export default function Navbar() {
     const history = useNavigate()
     const refer = useRef(null)
 
-    const color = "#F4B92D"
+    const color = "#212427"
     const [blur, setBlur] = useState(false)
     const date = 1678538895
 
@@ -71,7 +53,7 @@ export default function Navbar() {
     }, [location.pathname])
 
 
-    
+
 
     if (!mainLoader) {
         setTimeout(() => {
@@ -93,7 +75,7 @@ export default function Navbar() {
     // className={`${!navLoader && 'fixed-top' } modal-open ${!blur&&'blur'}`}>
 
     return (
-        <div style={{ zIndex: modalIsOpen ? '0' : '999999999', backgroundColor: 'rgba(0,0,0,0)' }}
+        <div style={{ zIndex: modalIsOpen ? '0' : '999999999', backgroundColor: '#ffffff' }}
             className={` modal-open ${!blur && 'blur'}`}>
             {adminView && <div style={{ backgroundColor: '#f88234' }} className='d-flex justify-content-center'>
                 <div className="d-flex my-2">
@@ -112,9 +94,9 @@ export default function Navbar() {
                         </button>
                     </div>
                     <div>
-                        <Link onClick={() => setMySpace(10)} className="navbar-brand" to='/' style={{ color: color }}>
-                            <img src={logo} alt="Logo" width="30" height="24" className="mx-2 d-inline-block align-text-top" />
-                            NUKHBA
+                        <Link onClick={() => setMySpace(10)} className="navbar-brand" to='/' style={{ color: color,transform:"scale(1.4)" }}>
+                            <img src={logo} alt="Logo" width="40"  className="mx-2 d-inline-block align-text-top" />
+                        
                         </Link>
                     </div>
                     <div>
@@ -138,11 +120,11 @@ export default function Navbar() {
 
 
                     </div>
-                    <div style={{ height: '100vh', backgroundColor: 'rgba(0,0,0,0)', backdropFilter: 'blur(15px)' }} className="offcanvas offcanvas-start" tabIndex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+                    <div style={{ height: '100%', backgroundColor: 'rgba(0,0,0,0)', backdropFilter: 'blur(15px)' }} className="offcanvas offcanvas-start" tabIndex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
                         <div className="offcanvas-header" style={{}}>
                             <div className="d-flex justify-content-end">
                                 <div>
-                                    <button onClick={() => setBlur(false)} ref={refer} style={{ color: color }} type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"><i className="fa fa-times-circle" aria-hidden={true}></i>
+                                    <button onClick={() => setBlur(false)} ref={refer} style={{ color: '#ffffff' }} type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close">
                                     </button>
                                 </div>
                             </div>
@@ -155,7 +137,7 @@ export default function Navbar() {
                                         {window.innerWidth < 992 && <>
                                             {finalCategory.map((e) => {
                                                 return <li className="nav-item">
-                                                    <Link style={{ color: color, fontSize: "30px" }} className="nav-link active" aria-current="page" to={`categories/${e._id}`} onClick={() => { refer.current.click() }}>{e.mainHeading}</Link>
+                                                    <Link style={{ color: '#ffffff', fontSize: "30px" }} className="nav-link active" aria-current="page" to={`categories/${e._id}`} onClick={() => { refer.current.click() }}>{e.mainHeading}</Link>
                                                 </li>
                                             })}
 
@@ -169,23 +151,33 @@ export default function Navbar() {
                             </ul>
 
                         </div>
-                        <div className="offcanvas-footer" style={{ borderTop: `1px solid ${color}` }}>
+                        <div className="offcanvas-footer" style={{ borderTop: `1px solid ${'#ffffff'}` }}>
                             <ul className="mynavbar-nav me-auto mb-2 mb-lg-0 py-3 px-2">
                                 <li className="nav-item mx-2 ">
 
                                     <a target="_blank" href="https://www.instagram.com/nukhba.shop/" style={{ cursor: 'pointer' }} className="nav-link">
-                                        <i style={{ fontSize: "25px", color: color }} className="fa fa-instagram" aria-hidden={true}></i>
+                                        <i style={{ fontSize: "25px", color: '#ffffff' }} className="fa fa-instagram" aria-hidden={true}></i>
 
                                     </a>
 
                                 </li>
                                 <li className="nav-item mx-2">
                                     <a target="_blank" href="https://www.facebook.com/nukhbapk" style={{ cursor: 'pointer' }} className="nav-link">
-                                        <i style={{ fontSize: "25px", color: color }} className="fa fa-facebook-official" aria-hidden={true}></i>
+                                        <i style={{ fontSize: "25px", color: '#ffffff' }} className="fa fa-facebook-official" aria-hidden={true}></i>
 
                                     </a>
 
                                 </li>
+                                <li className="nav-item">
+                                        <a onClick={() => openRef.current.click()} style={{ cursor: 'pointer' }} className="nav-link">
+
+                                            <img src={country == "Pakistan" ? "https://www.junaidjamshed.com/static/version1698317217/frontend/Rltsquare/junaidjamshed/en_US/Magento_Theme/images/pak-flag.png" : "https://upload.wikimedia.org/wikipedia/commons/0/0d/Flag_of_Saudi_Arabia.svg"} id="myBtn" alt="image-icon" width="30" >
+
+                                            </img>
+
+                                        </a>
+
+                                    </li>
                             </ul>
                         </div>
                     </div>
@@ -209,12 +201,14 @@ export default function Navbar() {
                                     </a>
 
                                 </li>
+
+
                             </ul>
                         </div>
                         <div>
-                            <Link className="navbar-brand" to='/' style={{ color: color }}>
-                                <img src={logo} alt="Logo" width="30" height="24" className="mx-2 d-inline-block align-text-top" />
-                                NUKHBA
+                            <Link className="navbar-brand" to='/' style={{ color: color,transform:"scale(1.4)" }}>
+                                <img src={logo} alt="Logo" width="40"  className="mx-2 d-inline-block align-text-top" />
+                                {/* NUKHBA */}
                             </Link>
                         </div>
                         <div>
@@ -222,7 +216,16 @@ export default function Navbar() {
                             <span className="navbar-text">
                                 <ul className="navbar-nav me-auto mb-2 mb-lg-0">
 
+                                    <li className="nav-item">
+                                        <a onClick={() => openRef.current.click()} style={{ cursor: 'pointer' }} className="nav-link">
+                                            
+                                            <img src={country == "Pakistan" ? "https://www.junaidjamshed.com/static/version1698317217/frontend/Rltsquare/junaidjamshed/en_US/Magento_Theme/images/pak-flag.png" : "https://upload.wikimedia.org/wikipedia/commons/0/0d/Flag_of_Saudi_Arabia.svg"} id="myBtn" alt="image-icon" width="30" >
 
+                                            </img>
+
+                                        </a>
+
+                                    </li>
                                     <li className="nav-item">
                                         <a style={{ cursor: 'pointer' }} onClick={() => { openCart(); fetchCart() }} className="nav-link">
                                             <i style={{ fontSize: "25px", color: color }} className="fa fa-shopping-cart" aria-hidden={true}></i>
@@ -230,6 +233,7 @@ export default function Navbar() {
                                         </a>
 
                                     </li>
+
                                 </ul>
                             </span>
                         </div>
@@ -265,29 +269,29 @@ export default function Navbar() {
             <button hidden={true} ref={ref} className="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#staticBackdrop" aria-controls="staticBackdrop">
                 Toggle static offcanvas
             </button>
-            <Cart />
+            {/* <Cart /> */}
         </div>
     )
 }
 
-export const fetchNavCategory=async()=>{
+export const fetchNavCategory = async () => {
 
-     
+
     const urlTwo = "https://faithful-bass-yoke.cyclic.app/api/products/allproducts"
     const responseTwo = await fetch(urlTwo, {
-      method: "GET", // *GET, POST, PUT, DELETE, etc.
-      mode: "cors", // no-cors, *cors, same-origin
-      cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-      credentials: "same-origin", // include, *same-origin, omit
-      headers: {
-        "Content-Type": "application/json",
-        "Accept": "*",
-      },
+        method: "GET", // *GET, POST, PUT, DELETE, etc.
+        mode: "cors", // no-cors, *cors, same-origin
+        cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+        credentials: "same-origin", // include, *same-origin, omit
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "*",
+        },
 
-      //   body: JSON.stringify(data), // body data type must match "Content-Type" header
+        //   body: JSON.stringify(data), // body data type must match "Content-Type" header
     });
-    const dataTwo = await responseTwo.json(); 
+    const dataTwo = await responseTwo.json();
 
 
-    return {navData:data,mainProducts:dataTwo}
+    return { navData: data, mainProducts: dataTwo }
 }

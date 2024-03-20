@@ -1,7 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 export default function ThankYou() {
-    const color = "#F4B92D"
+    const color = "#212427"
+
     
     window.scrollTo(0,0)
     return (
@@ -11,7 +12,7 @@ export default function ThankYou() {
                     <h1 className="text-center">Thank You!</h1>
                     <h3 className="text-center">Your Order has been placed successfully</h3>
                     <div className="d-flex justify-content-center">
-                        <Link to="/"><button style={{ border: '1px solid #F4B92D', backgroundColor: 'black', color: color, fontFamily: 'Twentieth Century' }} className="btn">Continue Shopping</button></Link>
+                        <Link to="/"><button style={{ border: '1px solid #F4B92D', color: 'white', backgroundColor: '#F4B92D', fontFamily: 'Twentieth Century' }} className="btn">Continue Shopping</button></Link>
                     </div>
                 </div>
             </div>

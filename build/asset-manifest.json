@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/static/css/main.8fd18200.css",
-    "main.js": "/static/js/main.c9d6b049.js",
+    "main.css": "/static/css/main.946be027.css",
+    "main.js": "/static/js/main.13b98744.js",
     "static/media/bodyCarousal.png": "/static/media/bodyCarousal.98284f222b6909882548.png",
     "static/media/eastman-roman-bd.ttf": "/static/media/eastman-roman-bd.deaf0c0d34cecb70951d.ttf",
     "static/media/SagrantinoRegular.TTF": "/static/media/SagrantinoRegular.089402abbe5cd4e96ab8.TTF",
     "static/media/Twentieth Century.ttf": "/static/media/Twentieth Century.af55cfad9df1e318eabb.ttf",
-    "static/media/nukhbaLogo.png": "/static/media/nukhbaLogo.779a2cb421a6f0e8e728.png",
+    "static/media/nukhbaLogo1.png": "/static/media/nukhbaLogo1.17da36e2a28c0e364fd0.png",
     "index.html": "/index.html",
-    "main.8fd18200.css.map": "/static/css/main.8fd18200.css.map",
-    "main.c9d6b049.js.map": "/static/js/main.c9d6b049.js.map"
+    "main.946be027.css.map": "/static/css/main.946be027.css.map",
+    "main.13b98744.js.map": "/static/js/main.13b98744.js.map"
   },
   "entrypoints": [
-    "static/css/main.8fd18200.css",
-    "static/js/main.c9d6b049.js"
+    "static/css/main.946be027.css",
+    "static/js/main.13b98744.js"
   ]
 }

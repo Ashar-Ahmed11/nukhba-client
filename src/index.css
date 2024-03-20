@@ -5,6 +5,13 @@ body {
     /* background: #000000; */
 }
 
+.form-control:focus {
+    border:2px solid #f4b92d !important;
+    box-shadow: none;
+  }
+
+
+
 .blackbackground *{
     background: #000000;
 }
@@ -31,19 +38,19 @@ body {
 /* This is footer CSS */
 
 .site-footer {
-    border-top: 2px solid #F4B92D;
+    border-top: 2px solid #ffffff;
     background-color: #000000;
     padding: 45px 0 20px;
     font-size: 15px;
     line-height: 24px;
-    color: #a38235;
+    color: #737373;
 }
 
 
 /* #bb943b */
 
 .site-footer hr {
-    border-top-color: #F4B92D;
+    border-top-color: #ffffff;
     opacity: 0.5
 }
 
@@ -52,7 +59,7 @@ body {
 }
 
 .site-footer h6 {
-    color: #F4B92D;
+    color: #ffffff;
     font-size: 16px;
     text-transform: uppercase;
     margin-top: 5px;
@@ -60,11 +67,11 @@ body {
 }
 
 .site-footer a {
-    color: #a38235;
+    color: #737373;
 }
 
 .site-footer a:hover {
-    color: #F4B92D;
+    color: #ffffff;
     text-decoration: none;
 }
 
@@ -78,7 +85,7 @@ body {
 }
 
 .footer-links a {
-    color: #a38235
+    color: #ffffff
 }
 
 .footer-links a:active,
@@ -103,7 +110,7 @@ body {
     margin-left: 6px;
     margin-right: 0;
     border-radius: 100%;
-    background-color: #a38235
+    background-color: #ffffff
 }
 
 .copyright-text {
@@ -227,7 +234,7 @@ body {
     height: 100%;
     width: 100%;
     position: fixed;
-    background-color: #000000;
+    background-color: #ffffff;
   
     color: #F4B92D
 }
@@ -322,9 +329,9 @@ body {
 }
 
 .modal-content {
-    background-color: #000000;
-    border: 1px solid #f88234;
-    color: #f88234;
+    background-color: #ffffff;
+    border: 1px solid #212427;
+    color: #212427;
 }
 
 .btnActive {
@@ -420,31 +427,25 @@ body {
 } */
 
 .glow {
-    width: 100px;
-    height: 100px;
-    border-radius: 100%;
-    background-color: #000000;
-    -webkit-animation: glowing 1s ease-in-out infinite alternate;
-    -moz-animation: glowing 1s ease-in-out infinite alternate;
-    animation: glowing 1s ease-in-out infinite alternate;
-    position: absolute;
+   
+    -webkit-animation: glowing 0.4s ease-in-out infinite alternate;
+    -moz-animation: glowing 0.4s ease-in-out infinite alternate;
+    animation: glowing 0.4s ease-in-out infinite alternate;
+    
     /* padding-left: 29px; */
     /* margin-left: 23px;
     margin-top: 5px;
     width: 150px;
     height: 164px; */
-    margin-left: 23px;
-    margin-top: 9px;
-    width: 150px;
-    height: 148px;
+   
 }
 
 @-webkit-keyframes glowing {
     from {
-        box-shadow: 0 0 10px #000000, 0 0 20px #000000, 0 0 30px #000000, 0 0 40px #000000, 0 0 50px #000000, 0 0 60px #000000, 0 0 70px #000000;
+        opacity: 0.5;
     }
     to {
-        box-shadow: 0 0 20px #000000, 0 0 30px #F4B92D, 0 0 40px #F4B92D, 0 0 50px #F4B92D, 0 0 60px #F4B92D, 0 0 70px #F4B92D, 0 0 80px #F4B92D;
+        opacity: 1;
     }
 }
 
@@ -768,4 +769,44 @@ a{
     padding-right: 0px !important;
   }
 
+  .visually-hidden {
+    /* position: absolute !important; */
+    /* clip: rect(1px, 1px, 1px, 1px); */
+    padding: 0 !important;
+    border: 0 !important;
+    height: 0.5px !important;
+    width: 0.5px !important;
+    overflow: hidden;
+  }
+
+/* .helloworldTwo{
+  transform:translate3d(0px, 0px, 0px) !important
+} */
   
+  .btn-close {
+    margin: 0;
+    border: 0;
+    padding: 0;
+    border-radius: 50%;
+    width: 15px;
+    height: 15px;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all 150ms;
+    
+    /* .icon-cross {
+        @include cross(20px, #000,2px);    
+    } */
+    
+    &:hover,
+    &:focus {
+      transform: rotateZ(90deg);
+      background: hsl(216, 100, 40);
+    }
+  
+  }
+
+

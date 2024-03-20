@@ -6,6 +6,8 @@ import { useContext } from 'react'
 import { useLoaderData, useParams } from 'react-router-dom'
 import { useLocation } from 'react-router-dom'
 import NoteContext from '../context/notes/noteContext'
+import MetaDecorator from './metaDecorator'
+import SubCategoriesPreview from './subcategoriesPreview'
 export default function Categories() {
     
     const location = useLocation()
@@ -13,7 +15,7 @@ export default function Categories() {
     const {id} = useParams()
     const context = useContext(NoteContext)
     const {setCategoryData,deleteCategory,mainLoader,getCategoryData,categoryData,setCatyEditor,setCategorial,editComponent,setComponent,setText,adminView} = context
-    const {mainHeading,firstHeading,firstSmallPara,firstSmallParaTwo,firstSmallParaThree,secondHeading,secondSmallPara,secondSmallParaTwo,secondSmallParaThree} = categoryData
+    const {mainHeading,firstHeading,firstSmallPara,firstSmallParaTwo,firstSmallParaThree,secondHeading,secondSmallPara,secondSmallParaTwo,secondSmallParaThree,mainCarousalImgDesktop} = categoryData
     
     useEffect(() => {
         // window.scroll(0,0)
@@ -42,14 +44,24 @@ export default function Categories() {
         }
     
     
-    const color = "#F4B92D"
+    const color = "#212427"
     const removeSpace = mainHeading&& mainHeading.replace(" ","")
     const slug = mainHeading && removeSpace.toLowerCase()
+
+
+
+    var excludeString = mainHeading&&mainHeading.substring(mainHeading.indexOf("*") + 1, mainHeading.lastIndexOf("*") );
+    const filteredFirstHeading = excludeString?firstHeading.replace(`*${excludeString}*`,""):firstHeading
+    console.log(excludeString)
+    
+    
     // console.log(slug)
     return (
         <>
+        <MetaDecorator title={filteredFirstHeading} description={secondHeading} imageUrl={mainCarousalImgDesktop} imageAlt={firstHeading}/>
     {   <div >
             <WalletCarousal />
+            <SubCategoriesPreview mainHeading={mainHeading}/>
             <div id='top'>
             <div className="mt-3">
                 <WalletList slug={slug} />
@@ -58,7 +70,7 @@ export default function Categories() {
             <div className="pb-5">
                 <div className="container ">
                     <div className="pb-5">
-                        <p  data-aos="fade-up"  data-aos-duration="1000" onClick={(e)=>{catyEditDeclare(e,'firstHeading')}} style={{ fontFamily: "Sagrantino", fontSize: "38.5px", color: color, fontWeight: "bolder" }} className='text-center mb-4 py-2'>{firstHeading}</p>
+                        <p  data-aos="fade-up"  data-aos-duration="1000" onClick={(e)=>{catyEditDeclare(e,'firstHeading')}} style={{ fontFamily: "Sagrantino", fontSize: "38.5px", color: color, fontWeight: "bolder" }} className='text-center mb-4 py-2'>{excludeString?firstHeading.replace(`*${excludeString}*`,""):firstHeading}</p>
                         <p  data-aos="fade-right"  data-aos-duration="1000" onClick={(e)=>{catyEditDeclare(e,'firstSmallPara')}} style={{ fontSize: "16.5px", color: color }}>{firstSmallPara}</p>
                         <p  data-aos="fade-left"  data-aos-duration="1000" onClick={(e)=>{catyEditDeclare(e,'firstSmallParaTwo')}} style={{ fontSize: "16.5px", color: color }}>{firstSmallParaTwo}</p>
                         <p  data-aos="fade-right"  data-aos-duration="1000" onClick={(e)=>{catyEditDeclare(e,'firstSmallParaThree')}} style={{ fontSize: "16.5px", color: color }}>{firstSmallParaThree}</p>

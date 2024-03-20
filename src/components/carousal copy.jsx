@@ -42,6 +42,8 @@ export default function WalletCarousal() {
         }
 
     }
+    var excludeString = mainHeading&&mainHeading.substring(mainHeading.indexOf("*") + 1, mainHeading.lastIndexOf("*") );
+
 
     return (
         <div
@@ -92,7 +94,7 @@ key={window.innerWidth > 750 ? mainCarousalImgDesktop : mainCarousalImgPhone} */
 
                         <div style={{zIndex:'30'}} className="mycarousel-caption">
 
-                            <p data-aos="fade-up" data-aos-duration="1000" style={{ fontFamily: 'Sagrantino', fontSize: "52.8px" }}>{mainHeading}</p>
+                            <p data-aos="fade-up" data-aos-duration="1000" style={{ fontFamily: 'Sagrantino', fontSize: "52.8px" }}>{excludeString?mainHeading.replace(`*${excludeString}*`,""):mainHeading}</p>
                         </div>
                     </div>
 

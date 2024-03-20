@@ -7,11 +7,11 @@ export default function CartItem({ data }) {
     const context = useContext(NoteContext)
     const { updateProduct, showAnimation,removeProduct } = context
     // formatted_with_symbol
-    const { image, name, quantity, price, id,animation } = data
-    const color = "#F4B92D"
+    const { image, name, quantity, price, id,animation,localePrice } = data
+    const color = "#212427"
     return (
         <div>
-            <div className={`card mb-3 ${animation?'removed':''}`} style={{ backgroundColor: "#000000", maxWidth: "540px", maxHeight: "200px", borderColor: color}}>
+            <div className={`card mb-3`} style={{ backgroundColor: "#ffffff", maxWidth: "540px", borderColor: color}}>
                 <div className="container">
                     <div className="row">
                         <div style={{display:"flex",justifyContent:'center',alignItems:'center'}} className="col-4">
@@ -22,7 +22,7 @@ export default function CartItem({ data }) {
                             <Image cloudName="dextrzp2q" className="img-fluid" key={image} publicId={image} type="fetch">
 
                                 <Transformation fetchFormat="webp" />
-                                <Transformation crop="pad" height="500" width="500" background="black" />
+                                <Transformation crop="pad" height="500" width="500" background="white" />
                                 <Transformation quality="60" />
                             </Image>
                         </div>
@@ -34,10 +34,7 @@ export default function CartItem({ data }) {
                                     <p h5 style={{ color: color }} className="card-text mx-2">{quantity}</p>
                                     <button h5 style={{ borderColor: color, color: color }} onClick={() => updateProduct(data, quantity + 1)} className="btn">+</button>
                                 </div>
-                                <p style={{ color: color }} className="card-text py-2">{price.toLocaleString('en-US', {
-                      style: 'currency',
-                      currency: 'PKR',
-                    })}</p>
+                                <p style={{ color: color }} className="card-text py-2">{localePrice}</p>
 
                             </div>
                         </div>

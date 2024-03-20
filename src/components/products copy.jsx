@@ -21,7 +21,7 @@ export default function FeaturedOnes() {
       
 
 
-    const color = "#F4B92D"
+    const color = "#212427"
 
     
     return (
@@ -30,16 +30,15 @@ export default function FeaturedOnes() {
 
                 <p   data-aos="fade-up"  data-aos-duration="1000" onClick={(e)=>{if(adminView){setText(e.target.innerText);editComponent();setComponent('secondHeading')}}} className="h1 text-center my-3" style={{ fontFamily: 'Sagrantino', color: color }}>{homeData.secondHeading}</p>
                 <div   data-aos="fade-up"  data-aos-duration="1000" className="d-flex justify-content-center">
-                    <button className="btn" style={{ borderRadius: "100px", backgroundColor: "#000000", color: color, width: 'max-content', borderColor: color }}>TOP SELLERS</button>
+                    <button className="btn" style={{ borderRadius: "100px", backgroundColor: "#000000", color: '#ffffff', width: 'max-content', borderColor: color }}>TOP SELLERS</button>
                 </div>
                 {productLoader && <div style={{ position: "fixed", bottom: "-30px", right: "-25px", zIndex: "99999" }}><Spinner /></div>}
                 {window.innerWidth > 750 ? <div className="row my-5">
 
-                    {products.filter((e)=>{return e.homePreview==true}).map((e) => {
+                {products.filter((e,i)=>{return e.homePreview==true }).map((e) => {
                         return <ProductItem data={e} />
-
-
                     })}
+                   
 
                 </div> :
                    

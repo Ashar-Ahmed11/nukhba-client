@@ -20,10 +20,12 @@ export default function CreateProduct() {
     const openModal = useRef(null)
     const history = useNavigate(null)
     const context = useContext(NoteContext)
-    const { deleteProduct, editProduct, setProductView, getProduct, productView, categories, asset, createProduct, setModalIsOpen, modalRef, setMyAsset, setImgPreview, imgPreview, setImgIsLoaded, setMainLoader, setcheckouter } = context
+    const { fetchProduct, products, setEditorLoader, deleteProduct, editProduct, setProductView, getProduct, productView, categories, asset, createProduct, setModalIsOpen, modalRef, setMyAsset, setImgPreview, imgPreview, setImgIsLoaded, setMainLoader, setcheckouter } = context
 
     useEffect(() => {
         setImgPreview([])
+        fetchProduct()
+
     }, [])
     console.log(categories)
 
@@ -33,8 +35,8 @@ export default function CreateProduct() {
     console.log(components.category)
     const dispatchProduct = (e) => {
         e.preventDefault()
-        prodid ? editProduct(prodid, components.namer, components.price, components.description, components.category, components.homePreview, components.youtubeLink)
-            : createProduct(components.namer, components.price, components.description, components.category, components.homePreview, components.youtubeLink)
+        prodid ? editProduct(prodid, components.namer, components.price, components.description, components.category, components.homePreview, components.youtubeLink, components.priceAED)
+            : createProduct(components.namer, components.price, components.description, components.category, components.homePreview, components.youtubeLink, components.priceAED)
     }
     const color = "#F4B92D"
     const token = localStorage.getItem('auth-token')
@@ -78,8 +80,8 @@ export default function CreateProduct() {
     useEffect(() => {
 
         if (productView) {
-            const { name, price, description, youtubeLink, homePreview, category } = productView
-            setComponents({ namer: name, price: price, description: description, youtubeLink: youtubeLink, homePreview: homePreview, category: category })
+            const { name, price, description, youtubeLink, homePreview, category, priceAED, _id } = productView
+            setComponents({ namer: name, price: price, description: description, youtubeLink: youtubeLink, homePreview: homePreview, category: category, priceAED: priceAED, _id: _id })
             setImgPreview(productView.assets)
         }
         return () => {
@@ -94,11 +96,16 @@ export default function CreateProduct() {
 
     const deleteModalRef = useRef(null)
 
-    const removeImage=(element)=>{
-        const filteredImages = imgPreview.filter((e)=>{return e._id!==element._id})
+    const removeImage = (element) => {
+        const filteredImages = imgPreview.filter((e) => { return e._id !== element._id })
         setImgPreview(filteredImages)
 
     }
+    console.log(components, imgPreview)
+
+    
+
+
 
 
     return (
@@ -111,7 +118,10 @@ export default function CreateProduct() {
                     <form>
 
                         <input value={components.namer} onChange={(e) => setComponents({ ...components, namer: e.target.value })} style={{ color: color, backgroundColor: '#000000', borderColor: color }} type="text" placeholder='Product Name' className="form-control my-2" />
-                        <input value={components.price} onChange={(e) => setComponents({ ...components, price: e.target.value })} style={{ color: color, backgroundColor: '#000000', borderColor: color }} type="text" placeholder='Product Price' className="form-control my-2" />
+                        <input value={components.price} onChange={(e) => setComponents({ ...components, price: e.target.value })} style={{ color: color, backgroundColor: '#000000', borderColor: color }} type="text" placeholder='Product Price PKR' className="form-control my-2" />
+                        <input value={components.priceAED} onChange={(e) => setComponents({ ...components, priceAED: e.target.value })} style={{ color: color, backgroundColor: '#000000', borderColor: color }} type="text" placeholder='Product Price AED' className="form-control my-2" />
+
+
                         <div>
                             <button onClick={(e) => { e.preventDefault(); openModal.current.click(); setEditImageUrl(null) }} style={{ borderColor: color, color: color }} className="btn">Upload Image</button>
                             <>
@@ -140,15 +150,15 @@ export default function CreateProduct() {
                                             onDragStart={() => { setfirstdndElement({ element: e, index: i }); console.log(i) }}
                                             onDragEnter={() => { setseconddndElement({ element: e, index: i }); console.log(i) }}
                                             onDragEnd={() => changeOrder()}
-                                            
+
                                             className="col-md-4 col-lg-3 col-6 p-1"><div class="card" style={{}}>
-                                                <img onClick={() => { openModal.current.click(); setEditImageUrl({ url: 'https://res.cloudinary.com/dextrzp2q/image/fetch/f_webp/q_60/b_black,c_pad,h_1000,w_1000/' + e.url, _id: e._id }); console.log(e) }} src={'https://res.cloudinary.com/dextrzp2q/image/fetch/f_webp/q_60/b_black,c_pad,h_1000,w_1000/' + e.url} class="card-img-top" alt="..." />
+                                                <img onClick={() => { openModal.current.click(); setEditImageUrl({ url: 'https://res.cloudinary.com/dextrzp2q/image/fetch/f_webp/q_60/b_white,c_pad,h_1000,w_1000/' + e.url, _id: e._id }); console.log(e) }} src={'https://res.cloudinary.com/dextrzp2q/image/fetch/f_webp/q_60/b_white,c_pad,h_1000,w_1000/' + e.url} class="card-img-top " alt="..." />
                                                 <span style={{ backgroundColor: '#000000', width: '30px', height: '30px', border: '1px solid #F4B92D', color: '#F4B92D' }} class="position-absolute top-0 start-100 translate-middle rounded-circle">
-                                            <p onClick={()=>removeImage(e)} style={{ paddingTop: '2px',cursor:'pointer' }} className='text-center'><i class="fas fa-times fa-lg"></i></p>
-                                            <span class="visually-hidden">New alerts</span>
-                                        </span>
+                                                    <p onClick={() => removeImage(e)} style={{ paddingTop: '2px', cursor: 'pointer' }} className='text-center'><i class="fas fa-times fa-lg"></i></p>
+                                                    <span class="visually-hidden">New alerts</span>
+                                                </span>
                                             </div>
-                                            
+
                                         </div>
 
 
@@ -162,7 +172,7 @@ export default function CreateProduct() {
 
 
                                 {categories.map((e) => {
-                                    return <option value={e.mainHeading.replace(" ","").toLowerCase()}>
+                                    return <option value={e.mainHeading.replace(" ", "").toLowerCase()}>
                                         {e.mainHeading.toLowerCase()}
                                     </option>
                                 })}
@@ -182,8 +192,10 @@ export default function CreateProduct() {
 
 
                         <div className='my-2'>
-                            <JoditEditor value={components.description} onBlur={(e) => { setComponents({ ...components, description: e }) }} />;
+                            <JoditEditor value={components.description} onBlur={(e) => { setComponents({ ...components, description: e }) }} />
                         </div>
+
+                        {/* {prodid && <button onClick={(e) => addToMeta(e)} className="btn btn-primary">Add To Meta</button>} */}
 
                         <div className={`d-flex ${prodid ? 'justify-content-between' : 'justify-content-end'}     align-items-center my-3`}>
                             {prodid && <button onClick={(e) => { e.preventDefault(), deleteModalRef.current.click() }} className="btn btn-danger">Delete</button>}

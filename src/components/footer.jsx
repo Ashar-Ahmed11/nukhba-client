@@ -5,7 +5,7 @@ export default function Footer() {
         <div>
             <footer class="site-footer">
                 <div class="container">
-                    <div class="row">
+                    <div class="row px-2">
                         <div class="col-sm-12 col-md-6">
                             <h6>About</h6>
                             <p class="text-justify">We pride ourselves on serving our customers with great taste in leather wearables and accessories, and we are extremely proud of our new Store at the center of Zainab Market, Karachi. We are a brand that not only represents this – but is also about pushing the boundaries of what is possible in the world of fashion. Nukhba is an innovative Premium Leather & Fashion Brand and we believe strongly in our vision which is to provide the Luxury our customers truly deserve.</p>

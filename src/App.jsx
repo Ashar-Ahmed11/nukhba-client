@@ -25,17 +25,26 @@ import ScrollToTop from './components/scrolltotop';
 import EditLoader from './components/editLoader'
 
 import AdminEditor from './components/adminEditor';
-
+import Cart from './components/cart';
 import CreateCategory from './components/admin/createProduct copy';
 import Dashboard from './components/admin/dashboard';
 import AdminProducts from './components/admin/adminproducts';
+import RegionChecker from './components/adminEditor copy';
+import { useContext } from 'react';
+import NoteContext from './context/notes/noteContext';
+import MetaDecorator from './components/metaDecorator';
+import { Link } from 'react-router-dom';
 export default function App() {
+    const context = useContext(NoteContext)
+    const {setCart,products,setProducts,country,productsFetched} = context
 
 
     useEffect(() => {
         window.history.scrollRestoration = 'manual'
+        
+     
     }, []);
-    document.body.style = 'background: #000000;'
+    document.body.style = 'overflow-x: hidden'
     // document.body.style = loader?'overflow:hidden;':'overflow:show;'
         const location = useLocation()
 
@@ -57,7 +66,46 @@ export default function App() {
     // }, [])
 
 
+    useEffect(() => {
+      if(productsFetched){
+        let newProducts = products
 
+        for (let index = 0; index < newProducts.length; index++) {
+            const element = newProducts[index];
+            if (country == "Saudi-Arabia") {
+                element.pricePKR = element.price
+                element.price = element.priceAED
+                element.localePrice = element.priceAED.toLocaleString('en-US', {
+                    style: 'currency',
+                    currency: 'SAR',
+                })
+
+            
+            }
+
+
+            else {
+                
+                element.price = element.pricePKR?element.pricePKR:element.price
+               
+                element.localePrice = element.price.toLocaleString('en-US', {
+                    style: 'currency',
+                    currency: 'PKR',
+                })
+                
+
+            }
+     
+        }
+        setProducts([...newProducts])
+        setCart([])
+
+    console.log('helloweo')
+    console.log(newProducts)
+
+    
+}
+}, [productsFetched,country])
 
     return (
         <div>
@@ -65,8 +113,15 @@ export default function App() {
 
 
 
-
-            <div style={{backgroundColor:"#000000"}}>
+            <Cart/>
+            <MetaDecorator 
+            title="Nukhba - Handcrafted Leather Products in Pakistan | Wallets, Belts, Bags" 
+            description="Nukhba is an innovative Premium Leather & Fashion Brand. We offer high quality leather wallets, bags, belts, and small luxury leather goods."
+            imageUrl="https://res.cloudinary.com/dextrzp2q/image/fetch/f_webp/q_60/https://res.cloudinary.com/dextrzp2q/image/upload/v1699712687/og-image_hjeklo.png"
+            imageAlt="Nukhba - Handcrafted Leather Products in Pakistan | Wallets, Belts, Bags"
+            />
+            <div style={{backgroundColor:"#ffffff"}}>
+                <RegionChecker/>
                 <ScrollToTop />
                 <EditLoader />
                 {/* https://web.whatsapp.com/send?phone=923083116347&text=Welcome%20to%20the%20store */}
@@ -76,6 +131,8 @@ export default function App() {
 
                     <Navbar />
                 </div>
+                
+                
                 <div hidden={location.pathname == '/checkout' && 'true' || location.pathname == '/thankyou' && 'true' || location.pathname == '/admin' && 'true'}>
                     <div className='whatsapp'>
                         <a target="_blank" aria-label="Chat on WhatsApp" href="https://wa.me/923083116347?text=How%20can%20I%20place%20an%20order%3F"> <i style={{ color: '#0dc143' }} className="fa fa-whatsapp" aria-hidden="true"></i> </a>

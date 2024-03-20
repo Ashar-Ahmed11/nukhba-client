@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom'
 const AdminProducts = () => {
   const history = useNavigate()
   const context = useContext(NoteContext)
-  const { setImgIsLoaded, setMainLoader, setcheckouter, products, fetchProduct } = context
+  const { setEditorLoader, setImgIsLoaded, setMainLoader, setcheckouter, products, fetchProduct } = context
   setImgIsLoaded(true)
   setMainLoader(false)
   setcheckouter(true)
@@ -61,18 +61,148 @@ const AdminProducts = () => {
 
 
 
+
+  const [sheetData, setsheetData] = useState([])
+  const getSheetProducts = async () => {
+
+    const url = "https://sheetdb.io/api/v1/diq89qn0z7ido"
+
+    const response = await fetch(url, {
+      method: 'GET', // *GET, POST, PUT, DELETE, etc.
+      mode: 'cors', // no-cors, *cors, same-origin
+      headers: {
+        'Content-Type': 'application/json'
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+      },
+
+      // body data type must match "Content-Type" header
+    }
+    );
+
+    const result = await response.json()
+    // setsheetData(result)
+    
+
+      // Use filter to get elements from arr1 that have unique property values
+      const uniqueElements = products.filter(obj1 =>
+        !result.some(obj2 => obj2['id'] === obj1['_id'])
+      )
+    
+      return uniqueElements;
+    
+    
+
+
+
+
+    // console.log(sheetData)
+  }
+
+
+
+
+  function getUniqueElementsByProperty(arr1, arr2) {
+    const uniqueElements = [];
+
+    arr1.forEach(obj1 => {
+      // Check if there is no element in arr2 with the same property value
+      const isUnique = !arr2.some(obj2 => obj1['_id'] === obj2['id']);
+
+      if (isUnique) {
+        uniqueElements.push(obj1);
+      }
+    });
+
+    return uniqueElements;
+  }
+
+  // console.log(products)
+
+
+  const addToMeta = async (e) => {
+    e.preventDefault()
+    setEditorLoader(true)
+
+    setEditorLoader(false)
+  }
+
+  const setToMeta = async () => {
+
+    setEditorLoader(true)
+    const prods = await getSheetProducts()
+  
+  
+    // const apnidescription = components.description.replaceAll('<p>', '').replaceAll('</p>', '')
+
+
+    const url = "https://sheetdb.io/api/v1/diq89qn0z7ido"
+
+    const response = await fetch(url, {
+      method: 'POST', // *GET, POST, PUT, DELETE, etc.
+      mode: 'cors', // no-cors, *cors, same-origin
+      headers: {
+        'Content-Type': 'application/json'
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: JSON.stringify({
+        data:
+          //  [
+          //     {
+          //         id: components._id,
+          //         title: components.namer,
+          //         price: components.price,
+          //         description: apnidescription,
+          //         condition: "new",
+          //         availability: "in stock",
+          //         brand: "Nukhba",
+          //         link: `https://nukhba.shop/product/${components._id}`,
+          //         image_link: imgPreview[0].url
+
+
+          //     }
+          // ],
+          prods.map((e) => {
+            return {
+              id: e._id,
+              title: e.name,
+              price: e.price,
+              description: e.description.replaceAll('<p>', '').replaceAll('</p>', ''),
+              condition: "new",
+              availability: "in stock",
+              brand: "Nukhba",
+              link: `https://nukhba.shop/product/${e._id}`,
+              image_link: e.assets[0].url,
+              additional_image_link:e.assets.slice(1).map((e)=>{return " " + e.url + " " }).toString()
+            }
+          })
+
+
+      })
+
+      // body data type must match "Content-Type" header
+    }
+    );
+
+    const data = await response.json()
+    console.log(data)
+    setEditorLoader(false)
+  }
+
+
   return (
     <div className="my-2">
-      <div className="container-fluid themeColor">
+      <div className="container-fluid ">
         <h1 className=" display-1 text-center">Products</h1>
         <div className=" py-2">
           <div className="d-flex justify-content-between align-items-center mb-4">
             <form onSubmit={(e) => filterBySearch(e)}>
               <div className="d-flex align-items-center">
-                <input value={searchQuery} onChange={(e) => setsearchQuery(e.target.value)} style={{ borderColor: "#F4B92D", color: 'white', backgroundColor: "#000000" }} type="text" className="form-control" />
+                <input value={searchQuery} onChange={(e) => setsearchQuery(e.target.value)} style={{ borderColor: "black", color: 'black', backgroundColor: "#ffffff" }} type="text" className="form-control" />
                 <div class="px-2">
-                  <button style={{ cursor: 'pointer', border: 'none', backgroundColor: "#000000" }} className='fas fa-search fa-lg'></button>
+                  <button style={{ cursor: 'pointer', border: 'none', backgroundColor: "#fafafa" }} className='fas fa-search fa-lg'></button>
                 </div>
+                <button onClick={() => setToMeta()} className="btn btn-primary">Sync Meta</button>
+
 
               </div>
 
@@ -106,7 +236,7 @@ const AdminProducts = () => {
                   <tr>
                     <td colSpan={4}>
                       <div className="py-5">
-                        <div style={{width:'60px',height:'60px'}} class="spinner-border " role="status">
+                        <div style={{ width: '60px', height: '60px' }} class="spinner-border " role="status">
                           <span class="visually-hidden">Loading...</span>
                         </div>
                       </div>
@@ -120,7 +250,7 @@ const AdminProducts = () => {
                     <td className='text-start py-3  ' style={{ width: '75%' }}>
                       <div className="d-flex align-items-center justify-content-between">
 
-                        <img style={{ width: '15vw', height: '100%' }} src={`https://res.cloudinary.com/dextrzp2q/image/fetch/f_webp/q_60/b_black,c_pad,h_1000,w_1000/${e.assets[0].url}`} alt="" />
+                        <img style={{ width: '15vw', height: '100%' }} src={`https://res.cloudinary.com/dextrzp2q/image/fetch/f_webp/q_60/b_white,c_pad,h_1000,w_1000/${e.assets[0].url}`} alt="" />
 
                         <span className='px-2 h3'>{e.name}</span>
 

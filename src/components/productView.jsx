@@ -9,7 +9,7 @@ import { useKeenSlider } from "keen-slider/react"
 import "keen-slider/keen-slider.min.css"
 import { useParams } from 'react-router-dom'
 import { Image, Transformation } from 'cloudinary-react'
-
+import MetaDecorator from './metaDecorator'
 import BarLoader from 'react-spinners/BarLoader'
 import ThumbnailPlugin from './thumbnailPlugin'
 import { fetchProduct } from './products'
@@ -98,7 +98,8 @@ export default function ProductView() {
     setQuantity(1)
   }
 
-  const color = "#F4B92D"
+  const color = "#212427"
+
   const [loading, setLoading] = useState(false)
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: "instant" })
@@ -124,10 +125,13 @@ export default function ProductView() {
   // console.log(youtubeLink)
   return (
     <>
+
       {productView && <div key={productView.image} >
+      <MetaDecorator title={productView.name} description={productView.description.replaceAll('<p>', '').replaceAll('</p>', '')} imageUrl={productView.assets[0].url} imageAlt={productView.name}/>
+
         <div className='d-flex justify-content-center mb-5' >
           {productLoader && <div style={{ position: "fixed", bottom: "-30px", right: "-25px", zIndex: "99999" }}><Spinner /></div>}
-          <div className="card mb-3 w-100" style={{ backgroundColor: "#000000" }} >
+          <div className="card mb-3 w-100 border-0 shadow-0 container" style={{ backgroundColor: "#ffffff" }} >
             <div className="row g-0">
               <div className="col-md-6">
                 <div className="">
@@ -144,11 +148,11 @@ export default function ProductView() {
                             </div>
                             {/* <img onLoad={() => setimgLoaded(true)} key={element.url} style={{ width: "100%", transform: "scale(1.2)" }} src={element.url} alt="" /> */}
 
-                            <div className='position-relative' key={element.url} onLoad={() => setimgLoaded(true)} style={{ width: "100%",height:'100%',backgroundColor:"#000000",paddingBottom:"100%" }}>
+                            <div className='position-relative' key={element.url} onLoad={() => setimgLoaded(true)} style={{ width: "100%",height:'100%',backgroundColor:"#ffffff",paddingBottom:"100%" }}>
                               <Image style={{top:'0'}} cloudName="dextrzp2q" className="card-img-top position-absolute w-100 h-100" key={element.url} publicId={element.url} type="fetch">
 
                                 <Transformation fetchFormat="webp" />
-                                <Transformation crop="pad" height="1000" width="1000" background="black" />
+                                <Transformation crop="pad" height="1000" width="1000" background="white" />
                                 <Transformation quality="60" />
                               </Image>
                             </div>
@@ -156,16 +160,16 @@ export default function ProductView() {
                         })}
                       </div>
 
-                      <div ref={thumbnailRef} className="keen-slider thumbnail" >
+                      <div ref={thumbnailRef} className="keen-slider thumbnail " >
                         {productView.assets.length > 1 && productView.assets.map((element) => {
-                          return <div className='keen-slider__slide number-slide' style={{ display: "flex", alignItems: 'center' }}>
+                          return <div className='keen-slider__slide number-slide ' style={{ display: "flex", alignItems: 'center' }}>
                             <div className='d-flex justify-content-center' style={{ position: 'absolute', zIndex: 99999999, opacity: imgLoaded && '0', alignItems: "center", width: "100%", height: "100%" }}>
                               <BarLoader color="#F4B92D" />
                             </div>
                             {/* <img key={element.url} style={{ width: "100%" }} src={element.url} alt="" /> */}
                             <div style={{ width: "100%" }}>
                               <Image cloudName="dextrzp2q" className="card-img-top" key={element.url} publicId={element.url} type="fetch">
-                                <Transformation crop="pad" height="1000" width="1000" background="black" />
+                                <Transformation crop="pad" height="1000" width="1000" background="white" />
                                 <Transformation fetchFormat="webp" />
                                 <Transformation quality="60" />
                               </Image>
@@ -217,10 +221,7 @@ export default function ProductView() {
                 <div className="card-body">
                   <p style={{ color: color, fontFamily: 'Sagrantino', fontSize: '30px' }} className="card-title p-3">{productView.name}</p>
 
-                  <p style={{ color: color, fontSize: '23px' }} className='p-3'>{productView.price.toLocaleString('en-US', {
-  style: 'currency',
-  currency: 'PKR',
-})}</p>
+                  <p style={{ color: color, fontSize: '23px' }} className='p-3'>{productView.localePrice}</p>
 
                   <div className="d-flex p-3 justify-content-between px-3 mx-2">
 
@@ -235,7 +236,7 @@ export default function ProductView() {
                   </div>
 
                   <div className="p-3 d-flex">
-                    <button style={{ backgroundColor: "#000000", color: color, borderColor: color, width: "100%", borderRadius: "10px" }} onClick={() => addProduct(productView, quantity)} className="btn">Add to cart</button>
+                    <button style={{ backgroundColor: "#f4b92d", color: "#ffffff", width: "100%", borderRadius: "10px" }} onClick={() => addProduct(productView, quantity)} className="btn">Add to cart</button>
                   </div>
                   <div className='p-3'>
                     <p style={{ fontSize: "16.5px", color: "#B18314", textDecoration: "underline" }}>Description</p>

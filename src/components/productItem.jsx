@@ -12,7 +12,7 @@ import ResizePlugin from './Plugins/ResizePlugin'
 import MutationPlugin from './Plugins/MutationObserver'
 export default function ProductItem({ data }) {
     const context = useContext(NoteContext)
-    const { addProduct, getProduct, setMainLoader, refreshPage } = context
+    const { addProduct, getProduct, setMainLoader, refreshPage,country } = context
     const { name, assets, price, description, _id, permalink, sku, quantity } = data
 
     const [scaler, setScaler] = useState("2.15")
@@ -54,7 +54,7 @@ export default function ProductItem({ data }) {
         }
 
         if (data.createdAt >= 1680084588) {
-            setScaler("0.82")
+            setScaler('1')
         }
 
 
@@ -67,7 +67,7 @@ export default function ProductItem({ data }) {
     const [imgLoader, setImgLoader] = useState(false)
 
 
-    const color = "#F4B92D"
+    const color = "#212427"
 
     const [currentSlide, setCurrentSlide] = useState(0)
     const [loaded, setLoaded] = useState(false)
@@ -96,9 +96,9 @@ export default function ProductItem({ data }) {
             data-aos-duration={window.innerWidth > 750 && "800"}
             data-aos-easing={window.innerWidth > 740 && "ease-out-quart"}
 
-            className={window.innerWidth > 750 ? 'col-lg-3 col-md-4 col-6 my-2 ' : 'mx-2'} style={{ cursor: 'pointer' }}>
+            className={window.innerWidth > 750 ? 'col-lg-3 col-md-4 col-6 my-2 px-2' : 'px-4'} style={{ cursor: 'pointer' }}>
             {/* <Link state={{ textDecoration: "none" }} to={`product/${id}`}></Link> */}
-            <div style={{ textDecoration: "none" }} to={`/product/${_id}`}> <div className="card" style={{ backgroundColor: "#000000" }}>
+            <div className='h-100' style={{ textDecoration: "none" }} to={`/product/${_id}`}> <div className="card h-100 border-0 shadow-0" style={{ backgroundColor: "#ffffff" }}>
                 {sku && <div class="ribbon ribbon-top-left"><span>{sku}% OFF</span></div>}
                 <div style={{ overflow: 'hidden' }}>
                     {/* style={{ transform: 'scale(1.3)', overflow: 'hidden', height: '309px', display: 'flex', justifyContent: 'center', alignItems: 'center' }} */}
@@ -120,10 +120,10 @@ export default function ProductItem({ data }) {
                                             <div key={e.url} onLoad={() => setImgLoader(true)} style={{ transform: i == 0 && `scale(${scaler})`, paddingBottom: '100%' }} className={`card-img-top position-relative w-100 h-100 ${imgLoader && 'image-loaded'}`}>
                                                 <Link to={`/product/${_id}`}>
                                                     <Image cloudName="dextrzp2q" className="card-img-top position-absolute w-100 h-100" style={{ top: 0 }} key={e.url} publicId={e.url} type="fetch">
-
+                                                  
                                                         <Transformation fetchFormat="webp" />
                                                         <Transformation quality="60" />
-                                                        <Transformation crop="pad" height="1000" width="1000" background="black" />
+                                                        <Transformation crop="pad" height="1000" width="1000" background="#f1f1f1" />
 
                                                     </Image>
                                                 </Link>
@@ -181,7 +181,7 @@ export default function ProductItem({ data }) {
 
                                     <Transformation fetchFormat="webp" />
                                     <Transformation quality="60" />
-                                    <Transformation crop="pad" height="1000" width="1000" background="black" />
+                                    <Transformation crop="pad" height="1000" width="1000" background="#f1f1f1" />
 
                                 </Image>
                             </Link>
@@ -191,17 +191,24 @@ export default function ProductItem({ data }) {
                 <Link to={`/product/${_id}`}>
 
                     <div className="card-body text-center">
-                        <p style={{ color: color, fontSize: '17.6px', margin: '0px 0px 4px' }} className="card-title">{name}</p>
+                        <p style={{ color: color, fontSize: '17.6px', margin: '0px 0px 4px' }} className="card-title">{name.slice(0,42)+ `${name.length>42?"...":""}`}</p>
                         {sku ? <div className="d-flex justify-content-center">
                             <strike style={{ color: color, fontWeight: 'bolder' }}><p style={{ color: '#ad7d0b', fontSize: '15.84px' }} className="card-text mx-2">{"Rs" + quantity.toLocaleString('en-US') + '.00'}</p></strike>
                             <p style={{ color: color, fontSize: '15.84px', fontWeight: 'bold' }} className="card-text">{data.price.toLocaleString('en-US', {
                                 style: 'currency',
                                 currency: 'USD',
                             })}</p>
-                        </div> : <p style={{ color: color, fontSize: '15.84px' }} className="card-text">{data.price.toLocaleString('en-US', {
-                            style: 'currency',
-                            currency: 'PKR',
-                        })}</p>}
+                        </div> : <p style={{ color: color, fontSize: '15.84px' }} className="card-text">{
+                        
+                        //     country=="Saudi-Arabia"?
+                        //     data.priceAED.toLocaleString('en-US', {
+                        //     style: 'currency',
+                        //     currency: 'AED',
+                        // })
+                        // :
+                        data.localePrice
+                    
+                    }</p>}
                     </div>
                 </Link>
             </div>

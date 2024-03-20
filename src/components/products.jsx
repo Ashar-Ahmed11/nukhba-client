@@ -51,7 +51,7 @@ export default function Products({productsTwo}) {
 
     // console.log(products)
     // console.log(wallet)
-    const color = "#F4B92D"
+    const color = "#212427"
     // const reversed = [...products].reverse();
     // console.log(products)
     return (
@@ -61,9 +61,11 @@ export default function Products({productsTwo}) {
                 <p data-aos="fade-up" data-aos-duration="1000" onClick={(e) => { if (adminView) { setText(e.target.innerText); editComponent(); setComponent('firstHeading') } }} className="h1 text-center my-5" style={{ fontFamily: 'Sagrantino', color: color }}>{homeData.firstHeading}</p>
                 {productLoader && <div style={{ position: "fixed", bottom: "-30px", right: "-25px", zIndex: "99999" }}><Spinner /></div>}
                 {window.innerWidth > 750 ? <div className="row">
-                    {products.filter((e)=>{return e.homePreview==true}).map((e) => {
+                    {products.filter((e,i)=>{return e.homePreview==true }).map((e) => {
                         return <ProductItem data={e} />
                     })}
+                   
+                  
 
                     {theProductLoader && <>
                         <div className="col-md-3 ">
