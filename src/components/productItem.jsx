@@ -119,7 +119,7 @@ export default function ProductItem({ data }) {
                                         return <div className="keen-slider__slide">
                                             <div key={e.url} onLoad={() => setImgLoader(true)} style={{ transform: i == 0 && `scale(${scaler})`, paddingBottom: '100%' }} className={`card-img-top position-relative w-100 h-100 ${imgLoader && 'image-loaded'}`}>
                                                 <Link to={`/product/${_id}`}>
-                                                    <Image cloudName="dextrzp2q" className="card-img-top position-absolute w-100 h-100" style={{ top: 0 }} key={e.url} publicId={e.url} type="fetch">
+                                                    <Image cloudName="ygbbrhil" className="card-img-top position-absolute w-100 h-100" style={{ top: 0 }} key={e.url} publicId={e.url} type="fetch">
                                                   
                                                         <Transformation fetchFormat="webp" />
                                                         <Transformation quality="60" />
@@ -177,7 +177,7 @@ export default function ProductItem({ data }) {
                         </>:
                         <div onLoad={() => setImgLoader(true)} style={{ transform: `scale(${scaler})`, paddingBottom: '100%' }} className={`card-img-top position-relative w-100 h-100 ${imgLoader && 'image-loaded'}`}>
                             <Link to={`/product/${_id}`}>
-                                <Image cloudName="dextrzp2q" className="card-img-top position-absolute w-100 h-100" style={{ top: 0 }} publicId={assets[0].url} type="fetch">
+                                <Image cloudName="ygbbrhil" className="card-img-top position-absolute w-100 h-100" style={{ top: 0 }} publicId={assets[0].url} type="fetch">
 
                                     <Transformation fetchFormat="webp" />
                                     <Transformation quality="60" />

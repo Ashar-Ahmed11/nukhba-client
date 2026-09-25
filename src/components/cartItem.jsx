@@ -19,7 +19,7 @@ export default function CartItem({ data }) {
 
 
 
-                            <Image cloudName="dextrzp2q" className="img-fluid" key={image} publicId={image} type="fetch">
+                            <Image cloudName="ygbbrhil" className="img-fluid" key={image} publicId={image} type="fetch">
 
                                 <Transformation fetchFormat="webp" />
                                 <Transformation crop="pad" height="500" width="500" background="white" />

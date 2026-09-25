@@ -149,7 +149,7 @@ export default function ProductView() {
                             {/* <img onLoad={() => setimgLoaded(true)} key={element.url} style={{ width: "100%", transform: "scale(1.2)" }} src={element.url} alt="" /> */}
 
                             <div className='position-relative' key={element.url} onLoad={() => setimgLoaded(true)} style={{ width: "100%",height:'100%',backgroundColor:"#ffffff",paddingBottom:"100%" }}>
-                              <Image style={{top:'0'}} cloudName="dextrzp2q" className="card-img-top position-absolute w-100 h-100" key={element.url} publicId={element.url} type="fetch">
+                              <Image style={{top:'0'}} cloudName="ygbbrhil" className="card-img-top position-absolute w-100 h-100" key={element.url} publicId={element.url} type="fetch">
 
                                 <Transformation fetchFormat="webp" />
                                 <Transformation crop="pad" height="1000" width="1000" background="white" />
@@ -168,7 +168,7 @@ export default function ProductView() {
                             </div>
                             {/* <img key={element.url} style={{ width: "100%" }} src={element.url} alt="" /> */}
                             <div style={{ width: "100%" }}>
-                              <Image cloudName="dextrzp2q" className="card-img-top" key={element.url} publicId={element.url} type="fetch">
+                              <Image cloudName="ygbbrhil" className="card-img-top" key={element.url} publicId={element.url} type="fetch">
                                 <Transformation crop="pad" height="1000" width="1000" background="white" />
                                 <Transformation fetchFormat="webp" />
                                 <Transformation quality="60" />

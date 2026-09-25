@@ -63,7 +63,7 @@ export default function WalletCarousal() {
             style={{ backgroundColor: "#000000", position: 'absolute', transition: '1s ease', opacity: hidePlaceholder ? '0' : '1',paddingBottom:window.innerWidth>750?"52.941%":"133.3%",zIndex:10 }}  onLoad={() => { setImgLoad(true) }} class="d-block w-100" >
               <Image 
               
-              cloudName="dextrzp2q"  style={{top:0}}  className={`card-img-top`}  publicId={window.innerWidth > 750 ? mainCarousalImgDesktop : mainCarousalImgPhone} type="fetch">
+              cloudName="ygbbrhil"  style={{top:0}}  className={`card-img-top`}  publicId={window.innerWidth > 750 ? mainCarousalImgDesktop : mainCarousalImgPhone} type="fetch">
 
                 <Transformation effect="blur:1000" fetchFormat="webp" />
                 <Transformation quality="60" />
@@ -78,7 +78,7 @@ export default function WalletCarousal() {
             style={{backgroundColor:"#000000",paddingBottom:window.innerWidth>750?"52.941%":"133.3%"}}  onLoad={() => { sethidePlaceholder(true) }} class="d-block w-100 h-100 position-relative" >
               <Image
               
-              cloudName="dextrzp2q" style={{top:0}} className={`card-img-top position-absolute`}  publicId={window.innerWidth > 750 ? mainCarousalImgDesktop : mainCarousalImgPhone} type="fetch">
+              cloudName="ygbbrhil" style={{top:0}} className={`card-img-top position-absolute`}  publicId={window.innerWidth > 750 ? mainCarousalImgDesktop : mainCarousalImgPhone} type="fetch">
 
                 <Transformation fetchFormat="webp" />
                 <Transformation quality="60" />

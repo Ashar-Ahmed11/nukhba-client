@@ -11,7 +11,7 @@ export default function CheckoutItem({element}) {
                                         {/* <img className='card-img' style={{ borderRadius: "10px",width:'128px' }} src={image} alt="" /> */}
                                         
                                         
-                            <Image cloudName="dextrzp2q" className='card-img' style={{ borderRadius: "10px",width:'128px' }} key={image} publicId={image} type="fetch">
+                            <Image cloudName="ygbbrhil" className='card-img' style={{ borderRadius: "10px",width:'128px' }} key={image} publicId={image} type="fetch">
 
 <Transformation fetchFormat="webp" />
 <Transformation crop="pad" height="500" width="500" background="white" />

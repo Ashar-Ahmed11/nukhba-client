@@ -170,7 +170,7 @@ export default function WalletItem({ data }) {
                         </div>}
 
 
-                        {/* <img type="" id='thatImage' key={e.url} loading="lazy" onLoad={(e) => { setImgLoader(true); setHeight('max-content'); e.target.alt = 'hello'; setChecker(e.target.alt) }} src={`https://res.cloudinary.com/dextrzp2q/e/fetch/f_avif/${transformedUrl}`} style={{ transform: `scale(${scaler})` }}  className={`card-img-top `} alt="..." /> */}
+                        {/* <img type="" id='thatImage' key={e.url} loading="lazy" onLoad={(e) => { setImgLoader(true); setHeight('max-content'); e.target.alt = 'hello'; setChecker(e.target.alt) }} src={`https://res.cloudinary.com/ygbbrhil/e/fetch/f_avif/${transformedUrl}`} style={{ transform: `scale(${scaler})` }}  className={`card-img-top `} alt="..." /> */}
 
 
 
@@ -182,7 +182,7 @@ export default function WalletItem({ data }) {
                                     return <div className="keen-slider__slide">
                                         <div key={e.url} onLoad={(e) => { setImgLoader(true); setHeight('max-content'); e.target.alt = 'hello'; setChecker(e.target.alt); e.target.loading = 'lazy'; e.target.onLoad = setImgLoader(true) }} style={{ transform: `scale(${scaler})`, marginBottom: '100%' }} className={`card-img-top position-relative w-100 h-100`}>
                                             <Link to={`/product/${_id}`}>
-                                                <Image cloudName="dextrzp2q" className="card-img-top position-absolute w-100 h-100" style={{ top: 0 }} key={e.url} publicId={e.url} type="fetch">
+                                                <Image cloudName="ygbbrhil" className="card-img-top position-absolute w-100 h-100" style={{ top: 0 }} key={e.url} publicId={e.url} type="fetch">
 
                                                     <Transformation aspectRatio="1:1" crop="pad" background="#f1f1f1" />
 

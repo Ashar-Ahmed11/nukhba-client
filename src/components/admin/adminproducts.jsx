@@ -250,7 +250,7 @@ const AdminProducts = () => {
                     <td className='text-start py-3  ' style={{ width: '75%' }}>
                       <div className="d-flex align-items-center justify-content-between">
 
-                        <img style={{ width: '15vw', height: '100%' }} src={`https://res.cloudinary.com/dextrzp2q/image/fetch/f_webp/q_60/b_white,c_pad,h_1000,w_1000/${e.assets[0].url}`} alt="" />
+                        <img style={{ width: '15vw', height: '100%' }} src={`https://res.cloudinary.com/ygbbrhil/image/fetch/f_webp/q_60/b_white,c_pad,h_1000,w_1000/${e.assets[0].url}`} alt="" />
 
                         <span className='px-2 h3'>{e.name}</span>
 

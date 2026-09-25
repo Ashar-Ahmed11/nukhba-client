@@ -31,7 +31,7 @@ const SubCategoriesPreview = ({mainHeading}) => {
 
 
                   <div style={{ backgroundColor: "#000000", position: 'absolute', transition: '1s ease', opacity: hidePlaceholder ? '0' : '1', zIndex: 10 }} key={e.mainCarousalImgDesktop} class="d-block w-100" >
-                    <Image cloudName="dextrzp2q" style={{ top: 0 }} className={`card-img-top`} key={e.mainCarousalImgDesktop} publicId={e.mainCarousalImgDesktop} type="fetch">
+                    <Image cloudName="ygbbrhil" style={{ top: 0 }} className={`card-img-top`} key={e.mainCarousalImgDesktop} publicId={e.mainCarousalImgDesktop} type="fetch">
 
                       <Transformation effect="blur:1000" fetchFormat="webp" />
                       <Transformation quality="60" />
@@ -41,7 +41,7 @@ const SubCategoriesPreview = ({mainHeading}) => {
 
                   </div>
                   <div style={{ backgroundColor: "#000000", paddingBottom:  "52.941%" }} key={e.mainCarousalImgDesktop} onLoad={() => { sethidePlaceholder(true) }} class="d-block w-100 h-100 position-relative" >
-                    <Image cloudName="dextrzp2q" style={{ top: 0 }} className={`card-img-top position-absolute`} key={e.mainCarousalImgDesktop} publicId={e.mainCarousalImgDesktop} type="fetch">
+                    <Image cloudName="ygbbrhil" style={{ top: 0 }} className={`card-img-top position-absolute`} key={e.mainCarousalImgDesktop} publicId={e.mainCarousalImgDesktop} type="fetch">
 
                       <Transformation fetchFormat="webp" />
                       <Transformation quality="60" />

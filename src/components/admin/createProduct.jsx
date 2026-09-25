@@ -152,7 +152,7 @@ export default function CreateProduct() {
                                             onDragEnd={() => changeOrder()}
 
                                             className="col-md-4 col-lg-3 col-6 p-1"><div class="card" style={{}}>
-                                                <img onClick={() => { openModal.current.click(); setEditImageUrl({ url: 'https://res.cloudinary.com/dextrzp2q/image/fetch/f_webp/q_60/b_white,c_pad,h_1000,w_1000/' + e.url, _id: e._id }); console.log(e) }} src={'https://res.cloudinary.com/dextrzp2q/image/fetch/f_webp/q_60/b_white,c_pad,h_1000,w_1000/' + e.url} class="card-img-top " alt="..." />
+                                                <img onClick={() => { openModal.current.click(); setEditImageUrl({ url: 'https://res.cloudinary.com/ygbbrhil/image/fetch/f_webp/q_60/b_white,c_pad,h_1000,w_1000/' + e.url, _id: e._id }); console.log(e) }} src={'https://res.cloudinary.com/ygbbrhil/image/fetch/f_webp/q_60/b_white,c_pad,h_1000,w_1000/' + e.url} class="card-img-top " alt="..." />
                                                 <span style={{ backgroundColor: '#000000', width: '30px', height: '30px', border: '1px solid #F4B92D', color: '#F4B92D' }} class="position-absolute top-0 start-100 translate-middle rounded-circle">
                                                     <p onClick={() => removeImage(e)} style={{ paddingTop: '2px', cursor: 'pointer' }} className='text-center'><i class="fas fa-times fa-lg"></i></p>
                                                     <span class="visually-hidden">New alerts</span>

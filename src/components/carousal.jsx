@@ -40,7 +40,7 @@ export default function Carousal() {
 
 
             <div  style={{ backgroundColor: "#000000", position: 'absolute', transition: '1s ease', opacity: hidePlaceholder ? '0' : '1',paddingBottom:window.innerWidth>750?"52.941%":"133.3%",zIndex:10 }} key={window.innerWidth > 750 ? mainCarousalImgDesktop : mainCarousalImgPhone} onLoad={() => { setImgLoad(true) }} class="d-block w-100" >
-              <Image cloudName="dextrzp2q"  style={{top:0}}  className={`card-img-top`} key={window.innerWidth > 750 ? mainCarousalImgDesktop : mainCarousalImgPhone} publicId={window.innerWidth > 750 ? mainCarousalImgDesktop : mainCarousalImgPhone} type="fetch">
+              <Image cloudName="ygbbrhil"  style={{top:0}}  className={`card-img-top`} key={window.innerWidth > 750 ? mainCarousalImgDesktop : mainCarousalImgPhone} publicId={window.innerWidth > 750 ? mainCarousalImgDesktop : mainCarousalImgPhone} type="fetch">
 
                 <Transformation effect="blur:1000" fetchFormat="webp" />
                 <Transformation quality="60" />
@@ -50,7 +50,7 @@ export default function Carousal() {
              
             </div>
             <div  style={{backgroundColor:"#000000",paddingBottom:window.innerWidth>750?"52.941%":"133.3%"}} key={window.innerWidth > 750 ? mainCarousalImgDesktop : mainCarousalImgPhone} onLoad={() => { sethidePlaceholder(true) }} class="d-block w-100 h-100 position-relative" >
-              <Image cloudName="dextrzp2q" style={{top:0}} className={`card-img-top position-absolute`} key={window.innerWidth > 750 ? mainCarousalImgDesktop : mainCarousalImgPhone} publicId={window.innerWidth > 750 ? mainCarousalImgDesktop : mainCarousalImgPhone} type="fetch">
+              <Image cloudName="ygbbrhil" style={{top:0}} className={`card-img-top position-absolute`} key={window.innerWidth > 750 ? mainCarousalImgDesktop : mainCarousalImgPhone} publicId={window.innerWidth > 750 ? mainCarousalImgDesktop : mainCarousalImgPhone} type="fetch">
 
                 <Transformation fetchFormat="webp" />
                 <Transformation quality="60" />

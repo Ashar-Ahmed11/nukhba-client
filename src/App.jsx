@@ -117,7 +117,7 @@ export default function App() {
             <MetaDecorator 
             title="Nukhba - Handcrafted Leather Products in Pakistan | Wallets, Belts, Bags" 
             description="Nukhba is an innovative Premium Leather & Fashion Brand. We offer high quality leather wallets, bags, belts, and small luxury leather goods."
-            imageUrl="https://res.cloudinary.com/dextrzp2q/image/fetch/f_webp/q_60/https://res.cloudinary.com/dextrzp2q/image/upload/v1699712687/og-image_hjeklo.png"
+            imageUrl="https://res.cloudinary.com/ygbbrhil/image/fetch/f_webp/q_60/https://res.cloudinary.com/ygbbrhil/image/upload/v1699712687/og-image_hjeklo.png"
             imageAlt="Nukhba - Handcrafted Leather Products in Pakistan | Wallets, Belts, Bags"
             />
             <div style={{backgroundColor:"#ffffff"}}>
